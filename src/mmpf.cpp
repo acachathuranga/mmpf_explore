@@ -64,7 +64,7 @@ MMPF::MMPF() : Node("MMPF_node")
     exploration_state_publisher_ = this->create_publisher<mmpf_explore::msg::ExplorationState>("/exploration_state", 1);
     
     /*------- Create timers ------*/
-    // timer_exploration_state_publisher_ = this->create_wall_timer( std::chrono::duration<double>(1.0 / rate_), std::bind(&RRT::publish_exploration_state, this));
+    timer_exploration_state_publisher_ = this->create_wall_timer( std::chrono::duration<double>(1.0 / rate_), std::bind(&MMPF::publish_exploration_state, this));
 
 }
 
