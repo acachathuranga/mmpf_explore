@@ -497,8 +497,13 @@ std::vector<MMPF::Pixel> MMPF::calculate_exploration_path(MMPF::Pixel current_lo
             // Calculate potential of considered neighbor
             Pixel curr_around = loc_around[i];
             float attract = 0;
+
+            // Check map bounds
+            uint curr_around_cell_index = curr_around.x + curr_around.y * map_info.width;
+            if ((map_info.width * map_info.height) <= curr_around_cell_index) continue;
+
             for (uint j = 0; j < target_clusters.size(); j++) {
-                float temp = float(cluster_potential_maps[j][curr_around.x + curr_around.y * map_info.width]);
+                float temp = float(cluster_potential_maps[j][curr_around_cell_index]);
                 if (temp < 1) continue;
                 attract = attract - K_ATTRACT * target_clusters[j].size / temp;
             }
